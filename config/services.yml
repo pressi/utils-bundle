@@ -1,0 +1,30 @@
+services:
+    _defaults:
+        autoconfigure: true
+        autowire: true
+        public: true
+
+    IIDO\UtilsBundle\:
+        resource: ../src/{Util}
+
+
+    iido.utils.basic:
+        class: IIDO\UtilsBundle\Util\BasicUtil
+
+    iido.utils.page:
+        class: IIDO\UtilsBundle\Util\PageUtil
+
+#    iido.utils.article:
+#        class: IIDO\UtilsBundle\Util\ArticleUtil
+
+    iido.utils.content:
+        class: IIDO\UtilsBundle\Util\ContentUtil
+
+    iido.utils.color:
+        class: IIDO\UtilsBundle\Util\ColorUtil
+
+    iido.utils.text:
+        class: IIDO\UtilsBundle\Util\TextUtil
+
+    iido.utils.styles:
+        class: IIDO\UtilsBundle\Util\StylesUtil

@@ -1,0 +1,47 @@
+{
+    "name"          : "2do/utils-bundle",
+    "type"          : "contao-bundle",
+    "description"   : "Contao 4 - IIDO Utils Bundle",
+    "homepage"      : "http://www.iido.at",
+    "license"       : "MIT",
+    "authors"       :
+    [
+        {
+            "name"      : "Stephan Preßl",
+            "email"     : "development@prestep.at",
+            "homepage"  : "http://www.prestep.at",
+            "role"      : "Developer"
+        }
+    ],
+    "version": "0.1.0",
+    "require":
+    {
+        "php": ">=8.0",
+        "contao/core-bundle": ">=4.9 || <=5.0"
+    },
+    "replace":
+    {
+        "2do/contao-utils-bundle": "*"
+    },
+    "conflict":
+    {
+        "contao/core": "*",
+        "contao/manager-plugin": "<2.0 || >=3.0"
+    },
+    "autoload":
+    {
+        "psr-4":
+        {
+            "IIDO\\UtilsBundle\\": "src/"
+        }
+    },
+    "require-dev":
+    {
+        "contao/manager-plugin": "^2.3",
+        "contao/easy-coding-standard": "^3.0"
+    },
+    "extra":
+    {
+        "contao-manager-plugin": "IIDO\\UtilsBundle\\ContaoManager\\Plugin"
+    }
+}
