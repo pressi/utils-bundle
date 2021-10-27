@@ -11,6 +11,10 @@ namespace IIDO\UtilsBundle\Util;
 
 
 use Contao\CoreBundle\ServiceAnnotation\Page;
+use Contao\Environment;
+use Contao\Input;
+use Contao\LayoutModel;
+use Contao\Model;
 use Contao\PageModel;
 use Contao\StringUtil;
 use Contao\System;
@@ -32,7 +36,7 @@ class PageUtil
     }
 
 
-
+    // TODO: to StylesUtil ??
     public function addDefaultPageStyleSheets()
     {
         global $objPage;
@@ -111,6 +115,7 @@ class PageUtil
 
 
 
+    // TODO: to ScriptUtil ??
     public function addDefaultPageScripts()
     {
         $pageUtil = System::getContainer()->get('iido.utils.page');
@@ -136,6 +141,8 @@ class PageUtil
 
             return $objPage->rootAlias;
         }
+
+        return '';
     }
 
 
@@ -171,5 +178,44 @@ class PageUtil
         }
 
         return $rootPage;
+    }
+
+
+
+    public function getPageLayout( Model $pageModel = null ): Model|bool
+    {
+        if( $pageModel === null )
+        {
+            return false;
+        }
+
+        $blnMobile  = ($pageModel->mobileLayout && Environment::get('agent')->mobile);
+
+        // Override the autodetected value
+        if( Input::cookie('TL_VIEW') === 'mobile' && $pageModel->mobileLayout )
+        {
+            $blnMobile = true;
+        }
+        elseif( Input::cookie('TL_VIEW') === 'desktop' )
+        {
+            $blnMobile = false;
+        }
+
+        $intId      = $blnMobile ? $pageModel->mobileLayout : $pageModel->layout;
+        $objLayout  = LayoutModel::findByPk( $intId );
+
+        // Die if there is no layout
+        if ($objLayout === null)
+        {
+            $objLayout = false;
+
+            if( $pageModel->pid > 0 )
+            {
+                $objParentPage  = PageModel::findByPk( $pageModel->pid );
+                $objLayout      = $this->getPageLayout( $objParentPage );
+            }
+        }
+
+        return $objLayout;
     }
 }
