@@ -28,3 +28,6 @@ services:
 
     iido.utils.styles:
         class: IIDO\UtilsBundle\Util\StylesUtil
+
+    iido.utils.scripts:
+        class: IIDO\UtilsBundle\Util\ScriptsUtil
