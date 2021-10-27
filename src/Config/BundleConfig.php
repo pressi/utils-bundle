@@ -198,10 +198,10 @@ class BundleConfig
             $bundleName = self::getBundleGroup() . '/' . self::getBundleName();
             $addon      = '';
 
-            if( is_dir($rootDir . '/vendor/' . $bundleName . '/src') )
-            {
-                $addon = '/src';
-            }
+//            if( is_dir($rootDir . '/vendor/' . $bundleName . '/src') )
+//            {
+//                $addon = '/src';
+//            }
 
             return 'vendor/' . $bundleName . $addon;
         }
